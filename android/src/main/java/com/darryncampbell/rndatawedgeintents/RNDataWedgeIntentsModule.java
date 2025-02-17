@@ -105,9 +105,21 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_ENUMERATEDLISET);
-        reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter);
-	    if (this.registeredAction != null)
-          registerReceiver(this.registeredAction, this.registeredCategory);
+        
+        
+        if (Build.VERSION.SDK_INT >= 34 && appCtx.getApplicationInfo().targetSdkVersion >= 34) {
+            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
+        }else{
+            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter);
+        }
+        
+	    if (this.registeredAction != null) {
+            if (Build.VERSION.SDK_INT >= 34 && appCtx.getApplicationInfo().targetSdkVersion >= 34) {
+                registerReceiver(this.registeredAction, this.registeredCategory, Context.RECEIVER_EXPORTED);
+            }else{
+                registerReceiver(this.registeredAction, this.registeredCategory);
+            }
+        }
           
     }
 
@@ -357,7 +369,13 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
         filter.addAction(action);
         if (category != null && category.length() > 0)
           filter.addCategory(category);
-        this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter);
+        
+        
+        if (Build.VERSION.SDK_INT >= 34 && appCtx.getApplicationInfo().targetSdkVersion >= 34) {
+            this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
+        }else{
+            this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter);
+        }
     }
 
     @ReactMethod
