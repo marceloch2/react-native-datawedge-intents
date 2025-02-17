@@ -115,11 +115,7 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
         }
         
 	    if (this.registeredAction != null) {
-            if (Build.VERSION.SDK_INT >= 34 && reactContext.getApplicationInfo().targetSdkVersion >= 34) {
-                registerReceiver(this.registeredAction, this.registeredCategory, Context.RECEIVER_EXPORTED);
-            }else{
-                registerReceiver(this.registeredAction, this.registeredCategory);
-            }
+            registerReceiver(this.registeredAction, this.registeredCategory);
         }
           
     }
