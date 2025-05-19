@@ -111,7 +111,7 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
         if (Build.VERSION.SDK_INT >= 34 && reactContext.getApplicationInfo().targetSdkVersion >= 34) {
             reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
         }else{
-            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter);
+            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
         }
         
 	    if (this.registeredAction != null) {
@@ -371,7 +371,7 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
         if (Build.VERSION.SDK_INT >= 34 && this.reactContext.getApplicationInfo().targetSdkVersion >= 34) {
             this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
         }else{
-            this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter);
+            this.reactContext.registerReceiver(scannedDataBroadcastReceiver, filter, Context.RECEIVER_EXPORTED);
         }
     }
 
